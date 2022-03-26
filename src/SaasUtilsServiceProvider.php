@@ -16,7 +16,7 @@ class SaasUtilsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(self::CONFIG_PATH, 'saas-utils');
 
-        $this->app->bind(DiskProviderContract::class, fn($app) => new DiskProvider());
+        $this->app->bind('disk-provider', fn($app) => new DiskProvider());
     }
 
     public function boot()

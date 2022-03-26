@@ -23,7 +23,7 @@ class DiskProvider extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return DiskProviderContract::class;
+        return 'disk-provider';
     }
 
 }

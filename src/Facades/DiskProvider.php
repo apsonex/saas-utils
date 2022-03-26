@@ -3,14 +3,15 @@
 namespace Apsonex\SaasUtils\Facades;
 
 use Apsonex\SaasUtils\Utils\StorageDisks\DiskProviderContract;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Facade;
 
 
 /**
  * @method static DiskProviderContract forEnvironment(string $environment)
- * @method static DiskProviderContract public ()
- * @method static DiskProviderContract private ()
- * @method static DiskProviderContract byVisibility(string $visibility)
+ * @method static Filesystem public()
+ * @method static Filesystem private()
+ * @method static Filesystem byVisibility(string $visibility)
  */
 class DiskProvider extends Facade
 {

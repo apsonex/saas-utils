@@ -12,8 +12,11 @@ class DefaultDiskProvider implements DiskProviderContract
 
     public function forEnvironment(string $environment): DiskProviderContract
     {
-        $this->environment = $environment;
-        return $this;
+        $self = new static;
+
+        $self->environment = $environment;
+
+        return $self;
     }
 
     /**
@@ -21,7 +24,7 @@ class DefaultDiskProvider implements DiskProviderContract
      */
     public function public(): Filesystem
     {
-        return Storage::disk($this->driverNameByEnvironment('public'));
+        return Storage::disk($this->driverName('public'));
     }
 
     /**
@@ -29,7 +32,7 @@ class DefaultDiskProvider implements DiskProviderContract
      */
     public function private(): Filesystem
     {
-        return Storage::disk($this->driverNameByEnvironment('private'));
+        return Storage::disk($this->driverName('private'));
     }
 
     /**
@@ -40,7 +43,7 @@ class DefaultDiskProvider implements DiskProviderContract
         return $visibility === 'public' ? $this->public() : $this->private();
     }
 
-    protected function driverNameByEnvironment($type = 'public')
+    protected function driverName($type = 'public')
     {
         return config('saas-utils.storage_disk.disk_drivers.' . $this->getEnvironment() . '.', $type);
     }
@@ -49,6 +52,6 @@ class DefaultDiskProvider implements DiskProviderContract
     {
         if ($this->environment) return $this->environment;
 
-        return app()->environment() ?: 'local';
+        return app()->environment();
     }
 }

@@ -13,7 +13,7 @@ return [
 
             'local' => ['public' => 'local', 'private' => 'local'],
 
-            'testing' => ['public' => 'we', 'private' => 'local'],
+            'testing' => ['public' => 'local', 'private' => 'local'],
 
             'production' => ['public' => 's3', 'private' => 's3_private'],
 

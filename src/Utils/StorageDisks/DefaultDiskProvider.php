@@ -45,7 +45,7 @@ class DefaultDiskProvider implements DiskProviderContract
 
     protected function driverName($type = 'public')
     {
-        return config('saas-utils.storage_disk.disk_drivers.' . $this->getEnvironment() . '.', $type);
+        return config('saas-utils.storage_disk.disk_drivers.' . $this->getEnvironment() . '.' . $type);
     }
 
     protected function getEnvironment(): bool|string|null

@@ -11,8 +11,18 @@ interface DiskProviderContract
 
     public function public(): Filesystem;
 
+    public function publicDiskName(): string;
+
     public function private(): Filesystem;
 
+    public function privateDiskName(): string;
+
+    public function default(): Filesystem;
+
+    public function defaultDiskName(): string;
+
     public function byVisibility(string $visibility): Filesystem;
+
+    public function byVisibilityDiskName(string $visibility): string;
 
 }

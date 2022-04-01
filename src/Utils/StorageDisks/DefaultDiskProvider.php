@@ -36,6 +36,14 @@ class DefaultDiskProvider implements DiskProviderContract
     }
 
     /**
+     * Get Private Disk
+     */
+    public function default(): Filesystem
+    {
+        return Storage::disk();
+    }
+
+    /**
      * Get Disk Public Or Private depending upon the visibility
      */
     public function byVisibility(string $visibility): Filesystem
@@ -43,9 +51,32 @@ class DefaultDiskProvider implements DiskProviderContract
         return $visibility === 'public' ? $this->public() : $this->private();
     }
 
+    /**
+     * Get Disk Public Or Private depending upon the visibility
+     */
+    public function byVisibilityDiskName(string $visibility): string
+    {
+        return $this->byVisibility($visibility)->getConfig()['driver'];
+    }
+
     protected function driverName($type = 'public')
     {
         return config('saas-utils.storage_disk.disk_drivers.' . $this->getEnvironment() . '.' . $type);
+    }
+
+    public function publicDiskName(): string
+    {
+        return $this->public()->getConfig()['driver'];
+    }
+
+    public function privateDiskName(): string
+    {
+        return $this->private()->getConfig()['driver'];
+    }
+
+    public function defaultDiskName(): string
+    {
+        return $this->default()->getConfig()['driver'];
     }
 
     protected function getEnvironment(): bool|string|null

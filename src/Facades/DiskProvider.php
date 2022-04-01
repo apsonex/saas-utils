@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static DiskProviderContract forEnvironment(string $environment)
+ * @method static Filesystem default()
+ * @method static string defaultDiskName()
  * @method static Filesystem public()
+ * @method static string publicDiskName()
  * @method static Filesystem private()
+ * @method static string privateDiskName()
  * @method static Filesystem byVisibility(string $visibility)
+ * @method static string byVisibilityDiskName(string $visibility)
  */
 class DiskProvider extends Facade
 {

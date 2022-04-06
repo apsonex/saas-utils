@@ -66,17 +66,17 @@ class DefaultDiskProvider implements DiskProviderContract
 
     public function publicDiskName(): string
     {
-        return $this->public()->getConfig()['driver'];
+        return config('saas-utils.storage_disk.disk_drivers.' . $this->getEnvironment() . '.public');
     }
 
     public function privateDiskName(): string
     {
-        return $this->private()->getConfig()['driver'];
+        return config('saas-utils.storage_disk.disk_drivers.' . $this->getEnvironment() . '.private');
     }
 
     public function defaultDiskName(): string
     {
-        return $this->default()->getConfig()['driver'];
+        return config('filesystems.default');
     }
 
     protected function getEnvironment(): bool|string|null

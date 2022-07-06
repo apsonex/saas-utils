@@ -67,3 +67,73 @@ if (!function_exists('sanitize_input')) {
         return htmlspecialchars((string)$string, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
 }
+
+if (!function_exists('imagick_installed')) {
+    function imagick_installed(): bool
+    {
+        return extension_loaded('imagick') && class_exists('Imagick');
+    }
+}
+
+if (!function_exists('valid_email')) {
+    function valid_email($email): bool
+    {
+        $emailArray = explode('@', $email);
+
+        return checkdnsrr(array_pop($emailArray), 'MX');
+    }
+}
+
+if (!function_exists('array_to_file')) {
+    function array_to_file(string $path, array $array): bool|int
+    {
+        return \Illuminate\Support\Facades\File::put(
+            $path,
+            "<?php\n" . "return " . var_export($array, true) . ";"
+        );
+    }
+}
+
+if (!function_exists('readable_random_string')) {
+    function readable_random_string($words = 1, $length = 6): string
+    {
+        $string = '';
+        for ($o = 1; $o <= $words; $o++) {
+            $vowels = ["a", "e", "i", "o", "u"];
+            $consonants = [
+                'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm',
+                'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'
+            ];
+
+            $word = '';
+            for ($i = 1; $i <= $length; $i++) {
+                $word .= $consonants[rand(0, 19)];
+                $word .= $vowels[rand(0, 4)];
+            }
+            $string .= mb_substr($word, 0, $length);
+            $string .= "-";
+        }
+        return mb_substr($string, 0, -1);
+    }
+}
+
+if (!function_exists('is_testing')) {
+    function is_testing(): bool
+    {
+        return app()->environment('testing');
+    }
+}
+
+if (!function_exists('public_disk')) {
+    function public_disk(): \Illuminate\Contracts\Filesystem\Filesystem
+    {
+        return \Illuminate\Support\Facades\Storage::disk('public');
+        // if (config('filesystems.default') == 'local') {
+        //     return \Illuminate\Support\Facades\Storage::disk('public');
+        // }
+
+        // return config('filesystems.disks.s3_public') ?
+        //     \Illuminate\Support\Facades\Storage::disk('s3_public') :
+        //     ;
+    }
+}

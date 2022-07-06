@@ -137,3 +137,12 @@ if (!function_exists('public_disk')) {
         //     ;
     }
 }
+
+if (!function_exists('array_filter_nulls')) {
+    function array_filter_nulls(array $arr): array
+    {
+        return array_filter($arr, function ($value) {
+            return !is_null($value);
+        });
+    }
+}

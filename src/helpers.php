@@ -146,3 +146,15 @@ if (!function_exists('array_filter_nulls')) {
         });
     }
 }
+
+if (!function_exists('encode_email')) {
+    function encode_email(string $email): string
+    {
+        $output = '';
+
+        for ($i = 0; $i < strlen($email); $i++) {
+            $output .= '&#' . ord($email[$i]) . ';';
+        }
+        return $output;
+    }
+}

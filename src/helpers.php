@@ -1,6 +1,7 @@
 <?php
 
-//
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 if (!function_exists('encode_id')) {
     function encode_id($id, $salt = null, $minLength = 8, $alphabets = null): string
@@ -156,5 +157,38 @@ if (!function_exists('encode_email')) {
             $output .= '&#' . ord($email[$i]) . ';';
         }
         return $output;
+    }
+}
+
+if (!function_exists('create_from_format_to_utc')) {
+    function create_from_format_to_utc($datetime, $timezone, $format = 'Y-m-d'): Carbon|null
+    {
+        if (!$datetime) return null;
+
+        $instance = \Illuminate\Support\Carbon::createFromFormat($format, $datetime, $timezone)->utc();
+
+        if ($instance instanceof Carbon) {
+            return $instance;
+        }
+
+        return null;
+    }
+}
+
+if (!function_exists('number_to_spell')) {
+    function number_to_spell($number = null): ?int
+    {
+        if (!$number) return null;
+
+        return (new \NumberFormatter('en', NumberFormatter::SPELLOUT))->format((int)$number);
+    }
+}
+
+if (!function_exists('per_page_limit')) {
+    function per_page_limit(Request $request, int $defaultLimit = 10, int $limit = 500, $pageName = 'per_page'): int
+    {
+        $perPage = $request->get($pageName, $defaultLimit);
+
+        return (int)($perPage > $limit ? $defaultLimit : $perPage);
     }
 }

@@ -129,13 +129,6 @@ if (!function_exists('public_disk')) {
     function public_disk(): \Illuminate\Contracts\Filesystem\Filesystem
     {
         return \Illuminate\Support\Facades\Storage::disk('public');
-        // if (config('filesystems.default') == 'local') {
-        //     return \Illuminate\Support\Facades\Storage::disk('public');
-        // }
-
-        // return config('filesystems.disks.s3_public') ?
-        //     \Illuminate\Support\Facades\Storage::disk('s3_public') :
-        //     ;
     }
 }
 

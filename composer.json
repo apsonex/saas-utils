@@ -7,15 +7,15 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "hashids/hashids": "^4.1",
-        "stevebauman/purify": "^4.0"
+        "php": "^8.2",
+        "hashids/hashids": "^5.0",
+        "stevebauman/purify": "^6.1"
     },
     "require-dev": {
-        "laravel/framework": "^9.0",
-        "nunomaduro/collision": "^6.1",
-        "orchestra/testbench": "^7.0",
-        "phpunit/phpunit": "^9.5"
+        "laravel/framework": "^10.40",
+        "nunomaduro/collision": "^7.10",
+        "orchestra/testbench": "^8.20",
+        "phpunit/phpunit": "^10.5"
     },
     "autoload": {
         "psr-4": {
